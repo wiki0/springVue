@@ -4,7 +4,6 @@
     <div id="page-wrapper" class="gray-bg dashbard-1">
       <top-bar></top-bar>
       <div class="row" id="app">
-        <img src="./assets/logo.png">
         <router-view/>
       </div>
     </div>

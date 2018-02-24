@@ -16,5 +16,10 @@ public class DashboradController {
         return "index";
     }
 
+    @RequestMapping(value = "/{where}")
+    public String findRoute(@PathVariable String where) {
+        return where;
+    }
+
 }
 
