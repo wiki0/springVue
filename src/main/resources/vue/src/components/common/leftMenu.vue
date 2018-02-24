@@ -33,7 +33,7 @@
                         <a href="#"><i class="fa fa-ge"></i> <span class="nav-label">应用</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="app-forward.html"><i class="fa fa-mail-forward"></i>转发应用</a></li>
+                            <li><router-link to="/app-forward"><i class="fa fa-mail-forward"></i>转发应用</router-link></li>
                             <li><a href="form_advanced.html"><i class="fa fa-history"></i>收录应用</a></li>
                         </ul>
                     </li>
