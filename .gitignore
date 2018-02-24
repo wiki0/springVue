@@ -24,8 +24,5 @@
 hs_err_pid*
 
 /.idea/
-src/main/resources/static/
-src/main/resources/vue/.idea/
-src/main/resources/vue/node_modules/
 target/
-/src/main/resources/vue/.idea/
+src/main/resources/vue/.idea/
