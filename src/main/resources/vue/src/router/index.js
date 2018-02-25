@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/page/HelloWorld'
+import dashBoard from '@/components/page/dashBoard'
 import appForward from '@/components/page/appForward'
+import hostList from '@/components/page/hostList'
+import hostMonitor from '@/components/page/hostMonitor'
 
 Vue.use(Router)
 
@@ -9,13 +11,23 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'HelloWorld',
-            component: HelloWorld
+            name: '/',
+            component: dashBoard
         },
         {
-            path: '/app-forward',
-            name: 'app-forward',
+            path: '/appForward',
+            name:'appForward',
             component: appForward
+        },
+        {
+            path: '/hostList',
+            name:'hostList',
+            component: hostList
+        },
+        {
+            path: '/hostMonitor',
+            name:'hostMonitor',
+            component: hostMonitor
         }
     ]
 })

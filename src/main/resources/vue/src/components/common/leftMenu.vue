@@ -11,18 +11,18 @@
                             <img src="../../assets/logosm.png">
                         </div>
                     </li>
-                    <li class="active">
-                        <a href="index.html"><i class="fa fa-home"></i> <span class="nav-label">首页</span></a>
+                    <li :class="{'active':$route.name==='/'}">
+                        <router-link to="/"><i class="fa fa-home"></i> <span class="nav-label">首页</span></router-link>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">宿主机</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li>
-                                <a href="host-monitor"><i class="fa fa-folder-open"></i>宿主机监控</a>
+                            <li :class="{ 'active': $route.name==='hostMonitor' }">
+                                <router-link to="/hostMonitor"><i class="fa fa-folder-open"></i>宿主机监控</router-link>
                             </li>
-                            <li>
-                                <a href="host.html"><i class="fa fa-list"></i>宿主机列表</a>
+                            <li :class="{ 'active': $route.name==='hostList' }">
+                                <router-link to="/hostList"><i class="fa fa-list"></i>宿主机列表</router-link>
                             </li>
                         </ul>
                     </li>
@@ -33,7 +33,9 @@
                         <a href="#"><i class="fa fa-ge"></i> <span class="nav-label">应用</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><router-link to="/app-forward"><i class="fa fa-mail-forward"></i>转发应用</router-link></li>
+                            <li :class="{ 'active': $route.name==='appForward' }">
+                                <router-link to="/appForward"><i class="fa fa-mail-forward"></i>转发应用</router-link>
+                            </li>
                             <li><a href="form_advanced.html"><i class="fa fa-history"></i>收录应用</a></li>
                         </ul>
                     </li>
@@ -91,8 +93,14 @@
 </template>
 
 <script>
+    import store from '@/vuex/store';
+
     export default {
-        name: "left-menu"
+        name: "left-menu",
+        data() {
+            return {}
+        },
+        store
     }
 </script>
 

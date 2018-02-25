@@ -1,7 +1,7 @@
 <template>
   <div>
     <left-menu></left-menu>
-    <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg">
       <top-bar></top-bar>
       <div class="row" id="app">
         <router-view/>
