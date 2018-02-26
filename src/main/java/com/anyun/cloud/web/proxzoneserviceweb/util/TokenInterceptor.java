@@ -3,6 +3,7 @@ package com.anyun.cloud.web.proxzoneserviceweb.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -27,9 +28,9 @@ public class TokenInterceptor implements ClientHttpRequestInterceptor
         //将令牌放入请求header中
         request.getHeaders().add("X-Auth-Token",token);
         // 请请求格式
-//        MediaType type = MediaType.parseMediaType("application/json;charset=UTF-8");
+        MediaType type = MediaType.parseMediaType("application/json;charset=UTF-8");
         // 请求体内容
-//        request.getHeaders().setContentType(type);
+        request.getHeaders().setContentType(type);
         return execution.execute(request, body);
     }
 }

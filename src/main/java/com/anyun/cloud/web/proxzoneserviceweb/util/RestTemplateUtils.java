@@ -1,8 +1,6 @@
 package com.anyun.cloud.web.proxzoneserviceweb.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
@@ -25,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.http.HttpMethod.DELETE;
@@ -46,12 +43,6 @@ public class RestTemplateUtils {
 
     @Autowired
     private RestTemplate restTemplate;
-
-    private final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-
-    public void set(String key, String value) {
-        params.add(key, value);
-    }
 
     /**
      * 发送/获取 服务端数据(主要用于解决发送put,delete方法无返回值问题).
@@ -101,74 +92,8 @@ public class RestTemplateUtils {
     }
 
     /**
-     * 无分页数组返回 GET方法
-     *
-     * @param url 地址
-     * @return list对象
-     */
-    public String getPagination(String url) {
-
-        String response = restTemplate.getForEntity(host + url, String.class).getBody();
-        return codeTranslate(response);
-    }
-
-    //分配IP段专用
-    public String getPagination(String url, Integer count, Integer blockId,String description) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("count", count);
-        params.put("blockId", blockId);
-        params.put("description", description);
-
-        UriComponents uriComponents = UriComponentsBuilder.fromUriString(host + url + "?count={count}&blockId={blockId}&description={description}").build().expand(params).encode();
-        URI uri = uriComponents.toUri();
-        String response = restTemplate.getForEntity(uri, String.class).getBody();
-        return codeTranslate(response);
-
-    }
-
-    /**
-     * 返回下拉框 GET方法
-     *
-     * @param url   地址
-     * @param param 参数
-     * @return list对象
-     */
-    public String getSelect(String url, String param) {
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("condition", param);
-        UriComponents uriComponents = UriComponentsBuilder.fromUriString(host + url + "?condition={condition}").build().expand(params).encode();
-        URI uri = uriComponents.toUri();
-        String response = restTemplate.getForEntity(uri, String.class).getBody();
-        JsonObject returnData = new JsonParser().parse(response).getAsJsonObject();
-        if (0 == returnData.get("code").getAsInt()) {
-
-            JsonArray array = returnData.get("content").getAsJsonArray();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("[");
-            for (JsonElement obj : array) {
-                stringBuilder.append("{\"value\":");
-                stringBuilder.append(obj.getAsJsonObject().get("appId").getAsString());
-                stringBuilder.append(",\"text\":\"");
-                stringBuilder.append(obj.getAsJsonObject().get("name").getAsString());
-                stringBuilder.append("\"},");
-            }
-            if (array.size() > 0) {
-                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-            }
-            stringBuilder.append("]");
-            return stringBuilder.toString();
-        } else {
-            LOGGER.error(response);
-            return "[]";
-        }
-    }
-
-    /**
      * 标准修改  POST方法
      *
-     * @param url 地址
-     * @return
      */
     public String update(String url, String jsonObject) {
         UriComponents uriComponents = UriComponentsBuilder.fromUriString(host + url).build();
@@ -197,44 +122,17 @@ public class RestTemplateUtils {
     /**
      * 自义定删除 DELETE方法
      *
-     * @param url 地址
-     * @return 说明：
-     * 1）url: 请求地址；
-     * 2）method: 请求类型(如：POST,PUT,DELETE,GET)；
-     * 3）requestEntity: 请求实体，封装请求头，请求内容
-     * 4）responseType: 响应类型，根据服务接口的返回类型决定
-     * 5）uriVariables: url中参数变量值
      */
-    public String delete(String url) {
-
-        String response = exchange(host + url , DELETE, null, String.class);
-        return codeTranslate(response);
-    }
-
     public String delete(String url, Integer id) {
 
         String response = exchange(host + url + "/" + id, DELETE, null, String.class);
         return codeTranslate(response);
     }
 
-    public String delete(String url, String id) {
-
-        String response = exchange(host + url + "/" + id, DELETE, null, String.class);
-        return codeTranslate(response);
-    }
-
-
-    public String delete(String url, Integer id, String user) {
-
-        String response = exchange(host + url + "/" + id + user, DELETE, null, String.class);
-        return codeTranslate(response);
-    }
 
     /**
      * code 翻译
      *
-     * @param response
-     * @return
      */
     public String codeTranslate(String response) {
         LOGGER.info(response);
@@ -250,7 +148,6 @@ public class RestTemplateUtils {
     /**
      * 上传文件
      *
-     * @return
      */
     public String sendFile(MultipartFile file, String url) {
         File f = null;
@@ -269,7 +166,6 @@ public class RestTemplateUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(response);
         return codeTranslate(response);
     }
 
