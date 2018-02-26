@@ -38,13 +38,10 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="fullscreen-link">
-                            <i class="fa fa-expand"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div :class="className" :id="id" :style="{height:height,width:width}" ref="chart1">
+                    <div :style="{height:height,width:width}" ref="chart1">
                     </div>
                 </div>
             </div>
@@ -56,9 +53,6 @@
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="fullscreen-link">
-                            <i class="fa fa-expand"></i>
                         </a>
                     </div>
                 </div>
@@ -111,13 +105,10 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="fullscreen-link">
-                            <i class="fa fa-expand"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div :class="className" :id="id" :style="{height:height,width:width}" ref="chart2">
+                    <div :style="{height:height,width:width}" ref="chart2">
                     </div>
                 </div>
             </div>
@@ -136,7 +127,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div :class="className" :id="id" :style="{height:height,width:width}" ref="chart3">
+                    <div :style="{height:height,width:width}" ref="chart3">
                     </div>
                 </div>
             </div>
@@ -149,13 +140,10 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="fullscreen-link">
-                            <i class="fa fa-expand"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div :class="className" :id="id" :style="{height:height,width:width}" ref="chart4">
+                    <div :style="{height:height,width:width}" ref="chart4">
                     </div>
                 </div>
             </div>
@@ -168,13 +156,10 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="fullscreen-link">
-                            <i class="fa fa-expand"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div :class="className" :id="id" :style="{height:height,width:width}" ref="chart5">
+                    <div :style="{height:height,width:width}" ref="chart5">
                     </div>
                 </div>
             </div>
@@ -187,14 +172,6 @@
 
     export default {
         props: {
-            className: {
-                type: String,
-                default: 'yourClassName'
-            },
-            id: {
-                type: String,
-                default: 'yourID'
-            },
             width: {
                 type: String,
                 default: '100%'

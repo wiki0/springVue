@@ -4,17 +4,22 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
+                    <div class="col-md-1"></div>
                     <div class="col-md-2">
-                        <p>阈值设置: </p>
+                        <p style="margin-top: 6px" class="nav navbar-nav navbar-left">
+                            关键词: </p>
                     </div>
-                    <div class="col-md-10">
-                        <p>当容器个数等于
-                            <input type="text" style="width: 100px;height:30px;border: solid 1px #CCCCCC;text-align: center;" value="300">
-                            时,发出警报，CPU需再配置
-                            <input type="text" style="width: 100px;height:30px;border: solid 1px #CCCCCC;text-align: center;" value="2">GHZ,Memory再配置
-                            <input type="text" style="width: 100px;height:30px;border: solid 1px #CCCCCC;text-align: center;" value="2">GB
-                        </p>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="宿主机ip">
+                            <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                        </div>
                     </div>
+                    <div class="col-md-1"></div>
                     <br/> <br/>
                 </div>
             </div>
@@ -22,7 +27,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5><i class="fa fa-bar-chart"></i> 宿主机列表</h5>
+                    <h5><i class="fa fa-bar-chart"></i> 容器列表</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -60,7 +65,6 @@
     import Vue from 'vue'
 
     export default {
-        name: "host-list",
         components: {VTable, VPagination},//组件注册
         data: function () {
             return {
@@ -80,40 +84,32 @@
                             isResize: true
                         },
                         {
-                            field: 'ip',
-                            title: '宿主机',
+                            field: 'cid',
+                            title: '容器ID',
                             width: 100,
                             titleAlign: 'center',
                             columnAlign: 'center',
                             isResize: true
                         },
                         {
-                            field: 'num',
-                            title: '运行中的容器个数',
+                            field: 'ip',
+                            title: '容器IP',
                             width: 80,
                             titleAlign: 'center',
                             columnAlign: 'center',
                             isResize: true
                         },
                         {
-                            field: 'sum',
-                            title: '停止的容器个数',
+                            field: 'name',
+                            title: '容器名称',
                             width: 80,
                             titleAlign: 'center',
                             columnAlign: 'center',
                             isResize: true
                         },
                         {
-                            field: 'cpu',
-                            title: 'CPU利用率',
-                            width: 80,
-                            titleAlign: 'center',
-                            columnAlign: 'center',
-                            isResize: true
-                        },
-                        {
-                            field: 'memory',
-                            title: 'mem利用率',
+                            field: 'time',
+                            title: '创建时间',
                             width: 80,
                             titleAlign: 'center',
                             columnAlign: 'center',
@@ -122,6 +118,22 @@
                         {
                             field: 'status',
                             title: '运行状态',
+                            width: 80,
+                            titleAlign: 'center',
+                            columnAlign: 'center',
+                            isResize: true
+                        },
+                        {
+                            field: 'services',
+                            title: '服务运行状态',
+                            width: 80,
+                            titleAlign: 'center',
+                            columnAlign: 'center',
+                            isResize: true
+                        },
+                        {
+                            field: 'hip',
+                            title: '宿主机IP',
                             width: 80,
                             titleAlign: 'center',
                             columnAlign: 'center',
@@ -143,7 +155,7 @@
         methods: {
             getTableData: function () {
                 let _self = this;
-                $.getJSON("static/ajax/hostList.json", "", function(data) {
+                $.getJSON("static/ajax/containerList.json", "", function(data) {
                     if (data.code) {
                         _self.tableConfig.tableData = data.content.data;
                         _self.total = data.content.total;
@@ -212,8 +224,9 @@
     // 自定义列组件
     Vue.component('table-operation', {
         template: '<span>' +
-        '<button class="btn btn-info btn-sm btn-alt btn-round tip" data-toggle="tooltip" data-placement="top" title="编辑" @click.stop.prevent="edit(rowData,index)"><i class="fa fa-edit"></i></button>&nbsp;' +
-        '<button class="btn btn-danger btn-sm btn-alt btn-round" data-toggle="tooltip" data-placement="top" title="删除" @click.stop.prevent="deleteRow(rowData,index)"><i class="fa fa-trash"></i></button>' +
+        '<button class="btn btn-info btn-sm btn-alt btn-round tip" data-toggle="tooltip" data-placement="top" title="启动" @click.stop.prevent="edit(rowData,index)"><i class="fa fa-edit"></i></button>&nbsp;' +
+        '<button class="btn btn-warning btn-sm btn-alt btn-round" data-toggle="tooltip" data-placement="top" title="停止" @click.stop.prevent="deleteRow(rowData,index)"><i class="fa fa-trash"></i></button>' +
+        '<button class="btn btn-info btn-sm btn-alt btn-round" data-toggle="tooltip" data-placement="top" title="重启服务" @click.stop.prevent="deleteRow(rowData,index)"><i class="fa fa-trash"></i></button>' +
         '</span>',
         props: {
             rowData: {

@@ -6,7 +6,7 @@
             </div>
             <ul class="nav navbar-top-links navbar-left">
                 <li>
-                    <a href="login.html">
+                    <a href="#">
                         首页
                     </a>
                 </li>

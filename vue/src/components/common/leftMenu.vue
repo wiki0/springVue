@@ -14,7 +14,7 @@
                     <li :class="{'active':$route.name==='/'}">
                         <router-link to="/"><i class="fa fa-home"></i> <span class="nav-label">首页</span></router-link>
                     </li>
-                    <li>
+                    <li :class="{ 'active': $route.name==='hostMonitor'|| $route.name==='hostList' }">
                         <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">宿主机</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -26,17 +26,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="container.html"><i class="fa fa-archive"></i> <span class="nav-label">容器</span> </a>
+                    <li :class="{'active':$route.name==='containerMonitor'}">
+                        <router-link to="/containerMonitor"><i class="fa fa-archive"></i> <span class="nav-label">容器</span></router-link>
                     </li>
-                    <li>
+                    <li :class="{ 'active': $route.name==='appForward'|| $route.name==='appCollect' }">
                         <a href="#"><i class="fa fa-ge"></i> <span class="nav-label">应用</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li :class="{ 'active': $route.name==='appForward' }">
                                 <router-link to="/appForward"><i class="fa fa-mail-forward"></i>转发应用</router-link>
                             </li>
-                            <li><a href="form_advanced.html"><i class="fa fa-history"></i>收录应用</a></li>
+                            <li :class="{ 'active': $route.name==='appCollect' }">
+                                <router-link to="/appCollect"><i class="fa fa-history"></i>收录应用</router-link>
+                            </li>
                         </ul>
                     </li>
                     <li>
