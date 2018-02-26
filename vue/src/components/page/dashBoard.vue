@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div ref="scroll">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>计算资源节点：</h2>
@@ -192,6 +192,8 @@
         },
         mounted() {
             this.initChart();
+            console.log()
+            $('#page-wrapper').height(this.$refs.scroll.scrollHeight+60);
         },
         methods: {
             initChart() {

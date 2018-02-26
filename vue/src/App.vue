@@ -1,9 +1,13 @@
 <template>
     <div>
         <left-menu></left-menu>
-        <div id="page-wrapper" class="gray-bg" ref="scroll">
+        <div id="page-wrapper" class="gray-bg">
             <top-bar></top-bar>
-            <router-view/>
+            <div class="wrapper wrapper-content">
+                <transition name="fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+            </div>
         </div>
         <!-- Back to top -->
         <div id="back-to-top"><a href="#">Back to Top</a>
@@ -22,7 +26,7 @@
             topBar
         },
         methods: {
-            handleScroll () {
+            handleScroll() {
                 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
                 if (scrollTop > 200) {
                     $("#back-to-top").fadeIn(200);
@@ -31,8 +35,12 @@
                 }
             }
         },
+        watch: {
+            $route(to, from) {
+                $('#page-wrapper').height(800);
+            }
+        },
         mounted() {
-            $('#page-wrapper').height(this.$refs.scroll.scrollHeight);
             $('#back-to-top, .back-to-top').click(function () {
                 $('html, body').animate({scrollTop: 0}, '800');
                 return false;
@@ -43,6 +51,21 @@
 </script>
 
 <style>
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .fade-enter-active {
+        transition: all .3s ease;
+    }
+
+    .fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .fade-enter, .fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+
     #back-to-top {
         position: fixed;
         z-index: 1000;

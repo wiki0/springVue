@@ -1,6 +1,5 @@
 <template>
     <div>
-        <br/>
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
@@ -207,7 +206,6 @@
             });
         }
     }
-
 
     // 自定义列组件
     Vue.component('table-operation', {
